@@ -31,6 +31,7 @@
 #include "debug.h" // needs to come before libblock-dev includes
 #include <l4/libblock-device/block_device_mgr.h>
 #include <l4/libblock-device/virtio_client.h>
+#include <l4/libblock-device/pm.h>
 
 static char const *const usage_str =
 "Usage: %s [-vqA] [--client CAP --device UUID [--ds-max NUM] [--readonly]] [--nomsi] [--nomsix]\n\n"
@@ -266,6 +267,7 @@ struct Client_opts
 
 static Block_device::Errand::Errand_server server;
 static Blk_mgr drv(server.registry());
+static Block_device::Pm_for_dm<Blk_mgr> pm(drv, "ahci-driver");
 std::vector<cxx::unique_ptr<Ahci::Hba>> _hbas;
 unsigned static devices_in_scan = 0;
 
@@ -493,6 +495,10 @@ main(int argc, char *const *argv)
   Dbg::info().printf("AHCI driver says hello.\n");
 
   Block_device::Errand::set_server_iface(&server);
+
+  if (!pm.init(L4Re::Env::env()->get_cap<L4Re::Inhibitor>("vbus")))
+    pm.register_obj(server.registry());
+
   setup_hardware();
 
   Dbg::trace().printf("Beginning server loop...\n");
