@@ -3,6 +3,9 @@
 [comment]: # (This is a generated file. Do not change it.)
 [comment]: # (Instead, change capdb.yml.)
 
+
+## Description {#l4re_servers_ahci_driver_description}
+
 The AHCI driver is a driver for PCI serial ATA host controllers.
 
 The AHCI driver is capable of exposing entire disks (by serial number) or
@@ -21,7 +24,8 @@ configured while the service starts. Dynamic clients can connect and disconnect
 during runtime of the AHCI driver.
 
 
-## Capabilities
+<hr>
+## Capabilities {#l4re_servers_ahci_driver_capabilities}
 
 * `vbus`
 
@@ -43,7 +47,8 @@ during runtime of the AHCI driver.
   Mandatory capability.
 
 
-## Command Line Options
+<hr>
+## Command Line Options {#l4re_servers_ahci_driver_cmdline_options}
 
 In the example above the ahci driver is started in its default configuration. To
 customize the configuration of the ahci-driver it accepts the following command
@@ -137,6 +142,7 @@ line options:
 
   Flag. True if provided.
 
+<hr>
 ## Building and Configuration
 
 The AHCI driver can be built using the L4Re build system. Just place this
@@ -166,7 +172,7 @@ The ahci driver needs access to a virtual bus capability (`vbus`). On the
 virtual bus the AHCI driver searches for AHCI 1.0 compliant storage controllers.
 Please see io's documentation about how to setup a virtual bus.
 
-## Virtio block host
+## Virtio block host {#l4re_servers_ahci_driver_param_virtio_block_host}
 
 Prior to connecting a client to a virtual block session it has to be created
 using the following Lua function. It has to be called on the client side of the
@@ -220,7 +226,8 @@ AHCI driver using the Virtio block protocol.
 
 
 
-## Examples
+<hr>
+## Examples {#l4re_servers_ahci_driver_examples}
 
 A couple of examples on how to request different disks or partitions are listed
 below.
