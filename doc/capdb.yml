@@ -123,7 +123,7 @@ text-after-cmds: |
 
   First an IPC gate (`ahci_bus`) is created which is used between the AHCI
   driver and a client to request access to a particular disk or partition. The
-  server-side is assigned to the mandatory `svr` capability of the AHCI driver.
+  server-side is assigned to the optional `svr` capability of the AHCI driver.
   See the section below on how to configure access to a disk or partition.
 
   The ahci driver needs access to a virtual bus capability (`vbus`). On the
@@ -139,8 +139,12 @@ caps:
     protocol: 'ipc'
     needs-server-right: true
     multiple: true
-
-server-cap-name: svr
+  - name: 'svr'
+    desc: |
+      Server capability providing clients access to a factory interface for
+      creating dynamic clients.
+    factory: true
+    mandatory: false
 factory:
   - obj-type: '0'
     return-type: Virtio_block_host

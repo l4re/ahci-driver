@@ -42,9 +42,8 @@ during runtime of the AHCI driver.
 
 * `svr`
 
-  Server Capability of application. Endpoint for IPC calls
-
-  Mandatory capability.
+  Server capability providing clients access to a factory interface for creating
+  dynamic clients.
 
 
 <hr>
@@ -165,7 +164,7 @@ L4.default_loader:start({
 
 First an IPC gate (`ahci_bus`) is created which is used between the AHCI driver
 and a client to request access to a particular disk or partition. The server-
-side is assigned to the mandatory `svr` capability of the AHCI driver. See the
+side is assigned to the optional `svr` capability of the AHCI driver. See the
 section below on how to configure access to a disk or partition.
 
 The ahci driver needs access to a virtual bus capability (`vbus`). On the
